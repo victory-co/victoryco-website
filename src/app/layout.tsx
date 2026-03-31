@@ -18,7 +18,13 @@ const raleway = Raleway({
 export const metadata: Metadata = {
   title: "Victory Co — OSRS Clan",
   description:
-    "Victory Company is an Old School RuneScape clan focused on PvM, events, and community.",
+    "Victory Company is an Old School RuneScape clan focused on PvM, events, and community. Join us!",
+  openGraph: {
+    title: "Victory Co — OSRS Clan",
+    description:
+      "PvM, events, raiding, skilling, and a chill community. Join Victory Company.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
