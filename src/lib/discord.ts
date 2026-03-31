@@ -44,8 +44,8 @@ export async function fetchGalleryImages(): Promise<
     .flatMap((msg) =>
       msg.attachments
         .filter((a) => a.content_type?.startsWith("image/"))
-        .map((a) => ({
-          messageId: msg.id,
+        .map((a, i) => ({
+          messageId: msg.attachments.length > 1 ? `${msg.id}-${i}` : msg.id,
           imageUrl: a.url,
           caption: msg.content || "",
           postedAt: msg.timestamp,
