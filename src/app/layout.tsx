@@ -1,5 +1,19 @@
 import type { Metadata } from "next";
+import { Cinzel, Raleway } from "next/font/google";
 import "./globals.css";
+import { Nav } from "@/components/nav";
+
+const cinzel = Cinzel({
+  subsets: ["latin"],
+  variable: "--font-cinzel",
+  display: "swap",
+});
+
+const raleway = Raleway({
+  subsets: ["latin"],
+  variable: "--font-raleway",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Victory Co — OSRS Clan",
@@ -12,9 +26,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const discordInviteUrl = process.env.DISCORD_INVITE_URL || "#";
+
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className={`${cinzel.variable} ${raleway.variable}`}>
+      <body>
+        <Nav discordInviteUrl={discordInviteUrl} />
+        {children}
+      </body>
     </html>
   );
 }
