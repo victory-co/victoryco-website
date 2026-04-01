@@ -1,6 +1,7 @@
 import { query } from "@/lib/db";
 import { BOSS_CATEGORIES } from "@/lib/boss-data";
 import { BossCard } from "@/components/boss-card";
+import { LeaderboardTabs } from "@/components/leaderboard-tabs";
 
 export const dynamic = "force-dynamic";
 
@@ -79,6 +80,9 @@ export default async function BossLeaderboardPage() {
           <div className="mx-auto mt-6 h-px w-16 bg-gradient-to-r from-transparent via-[#d4a843]/50 to-transparent" />
         </div>
       </header>
+
+      {/* Leaderboard type navigation */}
+      <LeaderboardTabs />
 
       {/* Category sections */}
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">

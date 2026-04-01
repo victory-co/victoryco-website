@@ -17,6 +17,7 @@ async function seed() {
   console.log("Clearing existing data...");
   await execute("DELETE FROM boss_leaderboard");
   await execute("DELETE FROM gallery_images");
+  await execute("DELETE FROM points_leaderboard");
 
   console.log("Seeding boss leaderboard...");
   for (const boss of BOSSES) {
@@ -52,6 +53,64 @@ async function seed() {
        VALUES ($1, $2, $3, $4)
        ON CONFLICT (discord_message_id) DO NOTHING`,
       [img.id, img.url, img.caption, img.posted]
+    );
+  }
+
+  // Points rank thresholds
+  // Unranked (<15), Prospect (15+), Apprentice (35+), Squire (60+), Soldier (100+),
+  // Victor (150+), Conqueror (210+), Vanquisher (290+), Vanguard (390+),
+  // Paragon (510+), Exemplar (670+), Ascendant (900+)
+  function getRankName(points: number): string {
+    if (points >= 900) return "Ascendant Victor";
+    if (points >= 670) return "Exemplar of Victory";
+    if (points >= 510) return "Paragon of Triumph";
+    if (points >= 390) return "Vanguard of Victory";
+    if (points >= 290) return "Vanquisher";
+    if (points >= 210) return "Conqueror";
+    if (points >= 150) return "Victor";
+    if (points >= 100) return "Soldier of Fortune";
+    if (points >= 60) return "Squire of Triumph";
+    if (points >= 35) return "Apprentice of Arms";
+    if (points >= 15) return "Prospect of Victory";
+    return "Unranked";
+  }
+
+  console.log("Seeding points leaderboard...");
+
+  // All-time: spread across rank tiers for variety
+  const allTimePoints = [1240, 875, 650, 480, 330, 275, 195, 145, 95, 55];
+  const allTimePlayers = [...MOCK_PLAYERS];
+
+  for (let i = 0; i < allTimePlayers.length; i++) {
+    const pts = allTimePoints[i];
+    await execute(
+      `INSERT INTO points_leaderboard (period, rank, player_name, points, rank_name)
+       VALUES ($1, $2, $3, $4, $5)`,
+      ["all_time", i + 1, allTimePlayers[i], pts, getRankName(pts)]
+    );
+  }
+
+  // Monthly: smaller point values, no rank names
+  const monthlyPoints = [312, 280, 245, 198, 174, 155, 132, 98, 74, 41];
+  const monthlyPlayers = [...MOCK_PLAYERS].sort(() => Math.random() - 0.5);
+
+  for (let i = 0; i < monthlyPlayers.length; i++) {
+    await execute(
+      `INSERT INTO points_leaderboard (period, rank, player_name, points, rank_name)
+       VALUES ($1, $2, $3, $4, $5)`,
+      ["monthly", i + 1, monthlyPlayers[i], monthlyPoints[i], null]
+    );
+  }
+
+  // Weekly: smallest point values, no rank names
+  const weeklyPoints = [87, 74, 63, 55, 48, 40, 33, 27, 19, 11];
+  const weeklyPlayers = [...MOCK_PLAYERS].sort(() => Math.random() - 0.5);
+
+  for (let i = 0; i < weeklyPlayers.length; i++) {
+    await execute(
+      `INSERT INTO points_leaderboard (period, rank, player_name, points, rank_name)
+       VALUES ($1, $2, $3, $4, $5)`,
+      ["weekly", i + 1, weeklyPlayers[i], weeklyPoints[i], null]
     );
   }
 

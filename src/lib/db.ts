@@ -44,11 +44,24 @@ export async function initSchema(): Promise<void> {
       synced_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
 
+    CREATE TABLE IF NOT EXISTS points_leaderboard (
+      id SERIAL PRIMARY KEY,
+      period TEXT NOT NULL,
+      rank INTEGER NOT NULL,
+      player_name TEXT NOT NULL,
+      points INTEGER NOT NULL,
+      rank_name TEXT,
+      synced_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      UNIQUE (period, rank)
+    );
+
     CREATE INDEX IF NOT EXISTS idx_boss_leaderboard_category
       ON boss_leaderboard (category);
     CREATE INDEX IF NOT EXISTS idx_boss_leaderboard_slug
       ON boss_leaderboard (boss_slug, rank);
     CREATE INDEX IF NOT EXISTS idx_gallery_images_posted
       ON gallery_images (posted_at DESC);
+    CREATE INDEX IF NOT EXISTS idx_points_leaderboard_period
+      ON points_leaderboard (period, rank);
   `);
 }
