@@ -33,7 +33,8 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ status: "ok" });
-  } catch {
+  } catch (err) {
+    console.error("Leaderboard sync error:", err);
     return NextResponse.json(
       { error: "Sync failed" },
       { status: 500 }
