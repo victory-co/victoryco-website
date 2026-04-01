@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PointsLeaderboard } from "@/components/points-leaderboard";
 
 export const metadata: Metadata = {
   title: "Ranks — Victory Co",
@@ -33,9 +34,13 @@ const AUTO_TRACKED = [
   },
   {
     title: "Boss KC Milestones",
-    detail:
-      "+1 pt per 100 KC (normal bosses, 50 pts/boss lifetime) or +1 pt per 25 KC (raids, 100 pts lifetime)",
-    cap: null,
+    detail: "+1 pt per 100 KC",
+    cap: "Cap: 50 pts/boss lifetime",
+  },
+  {
+    title: "Raids KC Milestones",
+    detail: "+1 pt per 25 KC",
+    cap: "Cap: 100 pts lifetime",
   },
 ] as const;
 
@@ -96,8 +101,35 @@ export default function RanksPage() {
       </header>
 
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+        {/* ── Points Leaderboard ── */}
+        <section className="mb-16">
+          <div className="mb-8 flex items-center gap-4">
+            <div className="h-px flex-1 bg-gradient-to-r from-[#d4a843]/20 to-transparent" />
+            <h2
+              className="shrink-0 text-xs font-semibold tracking-[0.3em] text-[#d4a843]/80 uppercase"
+              style={{ fontFamily: "var(--font-cinzel), serif" }}
+            >
+              Leaderboard
+            </h2>
+            <div className="h-px flex-1 bg-gradient-to-l from-[#d4a843]/20 to-transparent" />
+          </div>
+
+          <PointsLeaderboard />
+        </section>
+
         {/* ── Rank Ladder ── */}
         <section className="mb-16">
+          <div className="mb-8 flex items-center gap-4">
+            <div className="h-px flex-1 bg-gradient-to-r from-[#d4a843]/20 to-transparent" />
+            <h2
+              className="shrink-0 text-xs font-semibold tracking-[0.3em] text-[#d4a843]/80 uppercase"
+              style={{ fontFamily: "var(--font-cinzel), serif" }}
+            >
+              Rank Progression
+            </h2>
+            <div className="h-px flex-1 bg-gradient-to-l from-[#d4a843]/20 to-transparent" />
+          </div>
+
           <div className="relative">
             {/* Vertical connecting line */}
             <div className="absolute left-[2.25rem] top-4 bottom-4 w-px bg-gradient-to-b from-[#8a8478]/20 via-[#d4a843]/30 to-[#d4a843]/60 sm:left-[2.75rem]" />
