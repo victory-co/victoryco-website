@@ -241,7 +241,7 @@ export default function Home() {
               <div className="relative">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-[#d4a843]/10 bg-[#111010]">
                   <Image
-                    src="/bosses/cox.png"
+                    src="/bosses/chambers_of_xeric.png"
                     alt="Chambers of Xeric — a clan favorite"
                     width={600}
                     height={450}
@@ -279,7 +279,7 @@ export default function Home() {
               <div className="relative order-2 lg:order-1">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-[#d4a843]/10 bg-[#111010]">
                   <Image
-                    src="/bosses/tob.png"
+                    src="/bosses/theatre_of_blood.png"
                     alt="Theatre of Blood — endgame raiding"
                     width={600}
                     height={450}
