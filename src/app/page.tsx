@@ -387,7 +387,7 @@ export default function Home() {
                   style={{ fontFamily: "var(--font-raleway), sans-serif" }}
                 >
                   Earn points through daily play, competitions, boss milestones, events,
-                  and teaching. Climb 11 ranks from Prospect of Victory all the way to
+                  and teaching. Climb the 11 ranks from Prospect of Victory all the way to
                   Ascendant Victor — consistency beats grinding.
                 </p>
                 <Link

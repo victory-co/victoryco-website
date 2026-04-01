@@ -95,7 +95,7 @@ export default function RanksPage() {
             className="mt-3 text-sm tracking-[0.25em] text-[#8a8478] uppercase"
             style={{ fontFamily: "var(--font-raleway), sans-serif" }}
           >
-            Climb through 11 ranks of the Victory Company
+            Climb through the 11 ranks of Victory Company
           </p>
           <div className="mx-auto mt-6 h-px w-16 bg-gradient-to-r from-transparent via-[#d4a843]/50 to-transparent" />
         </div>
