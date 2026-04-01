@@ -75,6 +75,7 @@ export const BOSSES: BossMeta[] = [
   { name: "TzTok-Jad", slug: "tztok_jad", category: "boss", image: "tztok_jad.png" },
   { name: "Vorkath", slug: "vorkath", category: "boss", image: "vorkath.png" },
   { name: "Yama", slug: "yama", category: "boss", image: "yama.png" },
+  { name: "Lunar Chests", slug: "lunar_chests", category: "boss", image: "lunar_chests.png" },
   { name: "Zulrah", slug: "zulrah", category: "boss", image: "zulrah.png" },
 
   // Slayer
@@ -102,7 +103,6 @@ export const BOSSES: BossMeta[] = [
 
   // Minigame
   { name: "Hespori", slug: "hespori", category: "minigame", image: "hespori.png" },
-  { name: "Lunar Chests", slug: "lunar_chests", category: "boss", image: "lunar_chests.png" },
   { name: "Mimic", slug: "mimic", category: "minigame", image: "mimic.png" },
   { name: "Tempoross", slug: "tempoross", category: "minigame", image: "tempoross.png" },
   { name: "Wintertodt", slug: "wintertodt", category: "minigame", image: "wintertodt.png" },

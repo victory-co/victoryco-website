@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
   try {
     await initSchema();
 
-    const data = await fetchFromBackend("/points/leaderboard") as PointsResponse;
+    const data = await fetchFromBackend("/api/website/points/leaderboard") as PointsResponse;
 
     // Clear existing data and reinsert (full refresh)
     await execute("DELETE FROM points_leaderboard");

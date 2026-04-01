@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
   try {
     await initSchema();
 
-    const data = await fetchFromBackend("/leaderboard") as Record<string, unknown>[];
+    const data = await fetchFromBackend("/api/website/leaderboard") as Record<string, unknown>[];
 
     for (const boss of BOSSES) {
       const bossData = data.find(
