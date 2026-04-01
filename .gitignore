@@ -17,5 +17,8 @@ npm-debug.log*
 .DS_Store
 *.pem
 
+# internal docs (specs, plans, setup guides)
+docs/
+
 # superpowers (brainstorm mockups)
 .superpowers/
