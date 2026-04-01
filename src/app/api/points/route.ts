@@ -14,6 +14,7 @@ export async function GET() {
     const rows = await query<PointsRow>(
       `SELECT period, rank, player_name, points, rank_name
        FROM points_leaderboard
+       WHERE rank <= 25
        ORDER BY period, rank`
     );
 

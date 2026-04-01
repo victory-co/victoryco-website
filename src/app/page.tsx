@@ -373,7 +373,7 @@ export default function Home() {
                   className="mb-4 inline-block text-xs tracking-[0.3em] text-[#d4a843]/70 uppercase"
                   style={{ fontFamily: "var(--font-raleway), sans-serif" }}
                 >
-                  Leaderboards
+                  Rank Progression
                 </span>
                 <h2
                   className="mb-6 text-3xl font-bold tracking-[0.08em] text-[#e8dcc8] sm:text-4xl"
@@ -386,74 +386,64 @@ export default function Home() {
                   className="mb-8 text-base leading-[1.8] text-[#8a8478] sm:text-lg"
                   style={{ fontFamily: "var(--font-raleway), sans-serif" }}
                 >
-                  Track your progress against fellow clan members. Our boss kill count
-                  leaderboards update regularly from the Wise Old Man API — see where you
-                  stand and push for the top spot.
+                  Earn points through daily play, competitions, boss milestones, events,
+                  and teaching. Climb 11 ranks from Prospect of Victory all the way to
+                  Ascendant Victor — consistency beats grinding.
                 </p>
                 <Link
-                  href="/leaderboards/bosses"
+                  href="/ranks"
                   className="group/link inline-flex items-center gap-2 rounded border border-[#d4a843]/30 bg-[#d4a843]/5 px-6 py-3 text-xs font-bold tracking-[0.2em] text-[#d4a843] uppercase transition-all duration-300 hover:border-[#d4a843]/60 hover:bg-[#d4a843]/10 hover:shadow-[0_0_30px_rgba(212,168,67,0.1)]"
                   style={{ fontFamily: "var(--font-raleway), sans-serif" }}
                 >
-                  View Boss Leaderboard
+                  View Ranks
                   <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5 transition-transform duration-300 group-hover/link:translate-x-1" aria-hidden="true">
                     <path d="M6 3l5 5-5 5" />
                   </svg>
                 </Link>
               </div>
 
-              {/* Leaderboard teaser — right */}
+              {/* Rank ladder teaser — right */}
               <div className="relative">
                 <div className="overflow-hidden rounded-lg border border-[#d4a843]/10 bg-[#111010]">
                   {/* Header bar */}
                   <div className="flex items-center gap-3 border-b border-[#d4a843]/10 px-5 py-3">
                     <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 text-[#d4a843]/60" aria-hidden="true">
-                      <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2z" />
+                      <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z" />
                     </svg>
                     <span
                       className="text-xs tracking-[0.15em] text-[#8a8478] uppercase"
                       style={{ fontFamily: "var(--font-cinzel), serif" }}
                     >
-                      Boss Kill Counts
+                      Rank Ladder
                     </span>
                   </div>
-                  {/* Mock rows */}
+                  {/* Rank preview rows */}
                   {[
-                    { rank: 1, name: "Player One", kc: "2,847", boss: "Vorkath" },
-                    { rank: 2, name: "Player Two", kc: "2,134", boss: "Vorkath" },
-                    { rank: 3, name: "Player Three", kc: "1,892", boss: "Vorkath" },
-                    { rank: 4, name: "Player Four", kc: "1,650", boss: "Vorkath" },
-                    { rank: 5, name: "Player Five", kc: "1,203", boss: "Vorkath" },
-                  ].map((row) => (
+                    { name: "Prospect of Victory", pts: 15, opacity: 0.08 },
+                    { name: "Squire of Triumph", pts: 60, opacity: 0.12 },
+                    { name: "Victor", pts: 150, opacity: 0.16 },
+                    { name: "Vanquisher", pts: 290, opacity: 0.2 },
+                    { name: "Ascendant Victor", pts: 900, opacity: 0.28 },
+                  ].map((rank) => (
                     <div
-                      key={row.rank}
+                      key={rank.name}
                       className="flex items-center gap-4 border-b border-[#ffffff]/[0.03] px-5 py-3 transition-colors duration-200 last:border-0 hover:bg-[#d4a843]/[0.03]"
+                      style={{ backgroundColor: `rgba(212,168,67,${rank.opacity * 0.3})` }}
                     >
                       <span
-                        className={`w-6 text-center text-sm font-bold ${
-                          row.rank === 1
-                            ? "text-[#d4a843]"
-                            : row.rank === 2
-                              ? "text-[#b8b8b8]"
-                              : row.rank === 3
-                                ? "text-[#cd7f32]"
-                                : "text-[#8a8478]/60"
-                        }`}
-                        style={{ fontFamily: "var(--font-cinzel), serif" }}
+                        className="flex-1 text-sm font-semibold"
+                        style={{
+                          fontFamily: "var(--font-cinzel), serif",
+                          color: rank.pts === 900 ? "#d4a843" : "#e8dcc8",
+                        }}
                       >
-                        {row.rank}
+                        {rank.name}
                       </span>
                       <span
-                        className="flex-1 text-sm text-[#e8dcc8]/80"
+                        className="text-xs tabular-nums text-[#8a8478]"
                         style={{ fontFamily: "var(--font-raleway), sans-serif" }}
                       >
-                        {row.name}
-                      </span>
-                      <span
-                        className="text-sm tabular-nums text-[#8a8478]"
-                        style={{ fontFamily: "var(--font-raleway), sans-serif" }}
-                      >
-                        {row.kc}
+                        {rank.pts} pts
                       </span>
                     </div>
                   ))}

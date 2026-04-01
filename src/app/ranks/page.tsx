@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PointsLeaderboard } from "@/components/points-leaderboard";
 
 export const metadata: Metadata = {
@@ -8,17 +9,17 @@ export const metadata: Metadata = {
 };
 
 const RANKS = [
-  { name: "Prospect of Victory", pts: 15 },
-  { name: "Apprentice of Arms", pts: 35 },
-  { name: "Squire of Triumph", pts: 60 },
-  { name: "Soldier of Fortune", pts: 100 },
-  { name: "Victor", pts: 150 },
-  { name: "Conqueror", pts: 210 },
-  { name: "Vanquisher", pts: 290 },
-  { name: "Vanguard of Victory", pts: 390 },
-  { name: "Paragon of Triumph", pts: 510 },
-  { name: "Exemplar of Victory", pts: 670 },
-  { name: "Ascendant Victor", pts: 900 },
+  { name: "Prospect of Victory", pts: 15, icon: "mentor" },
+  { name: "Apprentice of Arms", pts: 35, icon: "prefect" },
+  { name: "Squire of Triumph", pts: 60, icon: "leader" },
+  { name: "Soldier of Fortune", pts: 100, icon: "executive" },
+  { name: "Victor", pts: 150, icon: "monarch" },
+  { name: "Conqueror", pts: 210, icon: "duellist" },
+  { name: "Vanquisher", pts: 290, icon: "ninja" },
+  { name: "Vanguard of Victory", pts: 390, icon: "inquisitor" },
+  { name: "Paragon of Triumph", pts: 510, icon: "expert" },
+  { name: "Exemplar of Victory", pts: 670, icon: "knight" },
+  { name: "Ascendant Victor", pts: 900, icon: "paladin" },
 ] as const;
 
 const AUTO_TRACKED = [
@@ -173,11 +174,18 @@ export default function RanksPage() {
                         borderColor: `rgba(212,168,67,${borderOpacity * 0.6})`,
                       }}
                     >
-                      <span
-                        className={`text-sm font-semibold tracking-wide sm:text-base ${textColor}`}
-                        style={{ fontFamily: "var(--font-cinzel), serif" }}
-                      >
-                        {rank.name}
+                      <span className={`flex items-center gap-2.5 text-sm font-semibold tracking-wide sm:text-base ${textColor}`}>
+                        <Image
+                          src={`/ranks/${rank.icon}.png`}
+                          alt=""
+                          width={20}
+                          height={20}
+                          className="h-5 w-5 shrink-0"
+                          style={{ imageRendering: "pixelated" }}
+                        />
+                        <span style={{ fontFamily: "var(--font-cinzel), serif" }}>
+                          {rank.name}
+                        </span>
                       </span>
 
                       <span
