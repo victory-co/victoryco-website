@@ -5,7 +5,8 @@ Public-facing website for **Victory Company**, an Old School RuneScape clan focu
 ## Features
 
 - **Landing Page** — Recruitment-focused story scroll with clan info, activities, and join requirements
-- **Boss KC Leaderboards** — Top 10 kill counts per boss, organized by category (raids, bosses, slayer, wilderness, minigames)
+- **Boss KC Leaderboards** — Top 10 kill counts across all 67 WOM-tracked bosses, organized by category (raids, bosses, slayer, wilderness, minigames)
+- **Ranks** — Points leaderboard (all time, monthly, weekly), rank ladder with all 11 clan ranks, and full breakdown of how points are earned
 - **Gallery** — Screenshot gallery powered by Discord, automatically synced from the `#clan-pics` channel
 
 ## Tech Stack
