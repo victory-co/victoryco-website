@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { query } from "@/lib/db";
 
+export const revalidate = 21600;
+
 interface LeaderboardRow extends Record<string, unknown> {
   boss_name: string;
   boss_slug: string;

@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { query } from "@/lib/db";
 
+export const revalidate = 21600;
+
 interface GalleryRow extends Record<string, unknown> {
   id: number;
   image_url: string;
