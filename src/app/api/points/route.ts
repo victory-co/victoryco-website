@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
+import { unstable_cache } from "next/cache";
 import { query } from "@/lib/db";
 
-export const revalidate = 21600;
+export const dynamic = "force-dynamic";
 
 interface PointsRow extends Record<string, unknown> {
   period: string;
@@ -11,8 +12,8 @@ interface PointsRow extends Record<string, unknown> {
   rank_name: string | null;
 }
 
-export async function GET() {
-  try {
+const getPoints = unstable_cache(
+  async () => {
     const rows = await query<PointsRow>(
       `SELECT period, rank, player_name, points, rank_name
        FROM points_leaderboard
@@ -39,7 +40,15 @@ export async function GET() {
       else if (row.period === "weekly") result.weekly.push(entry);
     }
 
-    return NextResponse.json(result);
+    return result;
+  },
+  ["api-points"],
+  { revalidate: 21600 }
+);
+
+export async function GET() {
+  try {
+    return NextResponse.json(await getPoints());
   } catch {
     return NextResponse.json(
       { error: "Failed to load points data" },

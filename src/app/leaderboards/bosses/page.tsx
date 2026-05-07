@@ -1,9 +1,9 @@
+import { unstable_cache } from "next/cache";
 import { query } from "@/lib/db";
 import { BOSS_CATEGORIES } from "@/lib/boss-data";
 import { BossCard } from "@/components/boss-card";
 
-
-export const revalidate = 21600;
+export const dynamic = "force-dynamic";
 
 interface LeaderboardRow extends Record<string, unknown> {
   boss_name: string;
@@ -23,34 +23,38 @@ interface BossData {
   entries: { rank: number; player: string; kc: number }[];
 }
 
-async function getLeaderboardData(): Promise<BossData[]> {
-  const rows = await query<LeaderboardRow>(
-    `SELECT boss_name, boss_slug, category, boss_image, rank, player_name, kc
-     FROM boss_leaderboard
-     ORDER BY category, boss_slug, rank`
-  );
+const getLeaderboardData = unstable_cache(
+  async (): Promise<BossData[]> => {
+    const rows = await query<LeaderboardRow>(
+      `SELECT boss_name, boss_slug, category, boss_image, rank, player_name, kc
+       FROM boss_leaderboard
+       ORDER BY category, boss_slug, rank`
+    );
 
-  const bosses: Record<string, BossData> = {};
+    const bosses: Record<string, BossData> = {};
 
-  for (const row of rows) {
-    if (!bosses[row.boss_slug]) {
-      bosses[row.boss_slug] = {
-        name: row.boss_name,
-        slug: row.boss_slug,
-        category: row.category,
-        image: row.boss_image,
-        entries: [],
-      };
+    for (const row of rows) {
+      if (!bosses[row.boss_slug]) {
+        bosses[row.boss_slug] = {
+          name: row.boss_name,
+          slug: row.boss_slug,
+          category: row.category,
+          image: row.boss_image,
+          entries: [],
+        };
+      }
+      bosses[row.boss_slug].entries.push({
+        rank: row.rank,
+        player: row.player_name,
+        kc: row.kc,
+      });
     }
-    bosses[row.boss_slug].entries.push({
-      rank: row.rank,
-      player: row.player_name,
-      kc: row.kc,
-    });
-  }
 
-  return Object.values(bosses);
-}
+    return Object.values(bosses);
+  },
+  ["boss-leaderboard"],
+  { revalidate: 21600 }
+);
 
 export default async function BossLeaderboardPage() {
   const bosses = await getLeaderboardData();
