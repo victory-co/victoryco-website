@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
+import { unstable_cache } from "next/cache";
 import { query } from "@/lib/db";
 
-export const revalidate = 21600;
+export const dynamic = "force-dynamic";
 
 interface LeaderboardRow extends Record<string, unknown> {
   boss_name: string;
@@ -13,15 +14,14 @@ interface LeaderboardRow extends Record<string, unknown> {
   kc: number;
 }
 
-export async function GET() {
-  try {
+const getLeaderboard = unstable_cache(
+  async () => {
     const rows = await query<LeaderboardRow>(
       `SELECT boss_name, boss_slug, category, boss_image, rank, player_name, kc
        FROM boss_leaderboard
        ORDER BY category, boss_slug, rank`
     );
 
-    // Group by boss_slug
     const bosses: Record<string, {
       name: string;
       slug: string;
@@ -47,7 +47,15 @@ export async function GET() {
       });
     }
 
-    return NextResponse.json(Object.values(bosses));
+    return Object.values(bosses);
+  },
+  ["api-leaderboard"],
+  { revalidate: 21600 }
+);
+
+export async function GET() {
+  try {
+    return NextResponse.json(await getLeaderboard());
   } catch {
     return NextResponse.json(
       { error: "Failed to load leaderboard data" },
