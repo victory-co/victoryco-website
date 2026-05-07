@@ -3,7 +3,7 @@ import { BOSS_CATEGORIES } from "@/lib/boss-data";
 import { BossCard } from "@/components/boss-card";
 
 
-export const dynamic = "force-dynamic";
+export const revalidate = 21600;
 
 interface LeaderboardRow extends Record<string, unknown> {
   boss_name: string;
