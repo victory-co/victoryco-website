@@ -59,6 +59,7 @@ export const BOSSES: BossMeta[] = [
   { name: "Doom of Mokhaiotl", slug: "doom_of_mokhaiotl", category: "boss", image: "doom_of_mokhaiotl.png" },
   { name: "Giant Mole", slug: "giant_mole", category: "boss", image: "giant_mole.png" },
   { name: "Kalphite Queen", slug: "kalphite_queen", category: "boss", image: "kalphite_queen.png" },
+  { name: "Mad Angel", slug: "mad_angel", category: "boss", image: "mad_angel.png" },
   { name: "Maggot King", slug: "maggot_king", category: "boss", image: "maggot_king.png" },
   { name: "Nightmare", slug: "nightmare", category: "boss", image: "nightmare.png" },
   { name: "Phosani's Nightmare", slug: "phosanis_nightmare", category: "boss", image: "nightmare.png" },
