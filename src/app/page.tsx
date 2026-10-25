@@ -493,7 +493,7 @@ export default function Home() {
 
             {/* Requirements grid */}
             <div className="mb-12 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
-              <RequirementBadge value="1250+" label="Total Level" />
+              <RequirementBadge value="1500+" label="Total Level" />
               <RequirementBadge value="100+" label="Combat Level" />
               <RequirementBadge value="Discord" label="Required" />
               <RequirementBadge value="Irons" label="Welcome" />
