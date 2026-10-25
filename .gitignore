@@ -22,3 +22,10 @@ docs/
 
 # superpowers (brainstorm mockups)
 .superpowers/
+
+# typescript incremental build cache
+*.tsbuildinfo
+
+# claude code local settings and worktrees
+.claude/settings.local.json
+.claude/worktrees/
