@@ -32,6 +32,7 @@ export const BOSSES: BossMeta[] = [
   { name: "Theatre of Blood (HM)", slug: "theatre_of_blood_hard_mode", category: "raids", image: "theatre_of_blood.png" },
   { name: "Tombs of Amascut", slug: "tombs_of_amascut", category: "raids", image: "tombs_of_amascut.png" },
   { name: "Tombs of Amascut (Expert)", slug: "tombs_of_amascut_expert", category: "raids", image: "tombs_of_amascut.png" },
+  { name: "The Fractured Archive", slug: "the_fractured_archive", category: "raids", image: "the_fractured_archive.png" },
 
   // Boss KC — GWD
   { name: "Commander Zilyana", slug: "commander_zilyana", category: "boss", image: "commander_zilyana.png" },
